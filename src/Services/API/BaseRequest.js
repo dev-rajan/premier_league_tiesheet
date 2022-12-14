@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { ENVIRONMENT_CONST } from "../../Constants/Constants";
 
-const apiUrl = ENVIRONMENT_CONST.API_BASE_URL;
+const apiUrl = ENVIRONMENT_CONST.REACT_APP_API_BASE_URL;
 
 axios.defaults.baseURL = apiUrl;
 

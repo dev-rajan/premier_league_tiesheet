@@ -101,4 +101,24 @@ body {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.title {
+  text-align: center;
+  margin: 20px;
+
+  h1 {
+    font-size: $title;
+    font-weight: $title-weight;
+    line-height: $title-height;
+    color: $title-color;
+  }
 }
