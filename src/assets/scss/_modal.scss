@@ -1,0 +1,74 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(77, 77, 77, 0.7);
+  transition: all 0.4s;
+
+  .modal__content {
+    border-radius: 4px;
+    position: relative;
+    width: 600px;
+    max-width: 90%;
+    height: 200px;
+    background: $white;
+    padding: 16px;
+
+    .modal__title {
+      padding-bottom: 10px;
+      border-bottom: 1px solid $borderColor;
+      h1 {
+        span {
+          font-size: $list;
+          font-weight: $list-weight;
+        }
+      }
+    }
+
+    .modal__body {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: space-around;
+      .team {
+        font-size: $header;
+        font-weight: $header-weight;
+      }
+      .score {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 200px;
+
+        .team__score {
+          font-size: $score;
+        }
+      }
+    }
+
+    .today__date {
+      color: $primaryColor;
+    }
+
+    .modal__close {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 30px;
+      border: none;
+      color: $primaryColor;
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      transition: 0.2s ease;
+      &:hover {
+        transform: rotate(60deg);
+      }
+    }
+  }
+}

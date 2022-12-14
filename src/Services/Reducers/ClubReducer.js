@@ -5,7 +5,7 @@ export const ClubData = (data = [], action) => {
 
   switch (action.type) {
     case SET_CLUB_LIST:
-      return [...actions.matches];
+      return actions;
     default:
       return data;
   }

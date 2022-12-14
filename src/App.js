@@ -1,7 +1,7 @@
 import React from "react";
 
-import Table from "./Components/Table/Table";
+import Home from "./Components/Table/Home";
 
-const App = () => <Table />;
+const App = () => <Home />;
 
 export default App;
