@@ -1,7 +1,7 @@
 import React from "react";
 
 const TableBody = ({ clubData, handleOpenModal, setModalData }) => {
-console.log(clubData);
+  console.log(clubData);
 
   const ClubList = () => (
     <tbody>
@@ -25,7 +25,17 @@ console.log(clubData);
           <td>{el.ga}</td>
           <td>{el.gd}</td>
           <td>{el.points}</td>
-          <td>{el.won}</td>
+          <td>
+            {el.form.map((elm, idx) => {
+              if (elm == 3) {
+                return <span key={idx}>won</span>;
+              } else if ((elm = 1)) {
+                return <span key={idx}>drew</span>;
+              } else {
+                return <span key={idx}>loss</span>;
+              }
+            })}
+          </td>
         </tr>
       ))}
     </tbody>
