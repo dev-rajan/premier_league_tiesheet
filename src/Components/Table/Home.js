@@ -21,57 +21,76 @@ const Home = () => {
     let score1 = gameOccurred && matches?.[i]?.score?.ft?.[0];
     let score2 = gameOccurred && matches?.[i]?.score?.ft?.[1];
 
-    console.log(gameOccurred, "game");
-
     if (matches?.length) {
       firstTeam.push({
         name: matches?.[i]?.team1,
+        played: gameOccurred ? 1 : 0,
         won: score1 > score2 ? 1 : 0,
         lost: score1 < score2 ? 1 : 0,
-        draw: score1 == score2 ? 1 : 0,
+        draw: !gameOccurred ? 0 : score1 == score2 ? 1 : 0,
         gf: score1,
         ga: score2,
         gd: Math.abs(score1 - score2),
-        points: score1 > score2 ? 3 : score1 == score2 ? 1 : 0,
+        points: !gameOccurred
+          ? 0
+          : score1 > score2
+          ? 3
+          : score1 == score2
+          ? 1
+          : 0,
       });
       secondTeam.push({
+        played: gameOccurred ? 1 : 0,
         name: matches?.[i]?.team2,
         won: score2 > score1 ? 1 : 0,
         lost: score2 < score1 ? 1 : 0,
-        draw: score2 == score1 ? 1 : 0,
+        draw: !gameOccurred ? 0 : score1 == score2 ? 1 : 0,
         gf: score2,
         ga: score1,
         gd: Math.abs(score1 - score2),
-        points: score2 > score1 ? 3 : score1 == score2 ? 1 : 0,
+        points: !gameOccurred
+          ? 0
+          : score1 > score2
+          ? 3
+          : score1 == score2
+          ? 1
+          : 0,
       });
     }
   }
 
   let combinedTeam = [...firstTeam, ...secondTeam];
 
-  const filteredClub = Object.values(
-    combinedTeam.reduce((acc, cur) => {
-      let club = `${cur.name}`;
-      if (!acc[club])
-        acc[club] = {
-          ...cur,
-          played: 1,
-        };
-      else {
-        acc[club].played += 1;
-        acc[club].won += cur.won !== undefined ? cur.won : 0;
-        acc[club].lost += cur.lost !== undefined ? cur.lost : 0;
-        acc[club].draw += cur.draw !== undefined ? cur.draw : 0;
-        acc[club].gf += cur.gf !== undefined ? cur.gf : 0;
-        acc[club].ga += cur.ga !== undefined ? cur.ga : 0;
-        acc[club].gd += cur.gd !== undefined ? cur.gd : 0;
-        acc[club].points += cur.points !== undefined ? cur.points : 0;
-      }
-      return acc;
-    }, {})
-  );
+  var result = [];
+  combinedTeam.reduce(function (res, value) {
+    if (!res[value.name]) {
+      res[value.name] = {
+        name: value.name,
+        played: 0,
+        won: 0,
+        lost: 0,
+        draw: 0,
+        gf: 0,
+        ga: 0,
+        gd: 0,
+        points: 0,
+      };
+      result.push(res[value.name]);
+    }
 
-  console.log(filteredClub, "res");
+    res[value.name].played += value.played;
+    res[value.name].won += value.won;
+    res[value.name].lost += value.lost;
+    res[value.name].draw += value.draw;
+    res[value.name].gf += value.gf;
+    res[value.name].ga += value.ga;
+    res[value.name].gd += value.gd;
+    res[value.name].points += value.points;
+    return res;
+  }, {});
+
+  const filteredClub = Object.values(result);
+  console.log(result);
 
   const [isOpen, setIsOpen] = useState({
     show: false,
