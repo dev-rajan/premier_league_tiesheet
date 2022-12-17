@@ -90,6 +90,7 @@ const Home = () => {
       res[value.name].form.shift();
     }
     res[value.name].form.push(value.points);
+
     return res;
   }, {});
 

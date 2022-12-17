@@ -1,5 +1,7 @@
 import React from "react";
 
+import PremierLogo from "../../../assets/images/clubs/premier.png";
+
 const TableBody = ({ clubData, handleOpenModal, setModalData }) => {
   const ClubList = () => (
     <tbody>
@@ -13,7 +15,10 @@ const TableBody = ({ clubData, handleOpenModal, setModalData }) => {
               setModalData(el);
             }}
           >
-            <p>{el.name}</p>
+            <span>
+              <img src={PremierLogo} alt={el.name} />
+            </span>
+            <span>{el.name}</span>
           </td>
           <td>{el.played}</td>
           <td>{el.won}</td>
@@ -21,8 +26,10 @@ const TableBody = ({ clubData, handleOpenModal, setModalData }) => {
           <td>{el.lost}</td>
           <td>{el.gf}</td>
           <td>{el.ga}</td>
-          <td>{el.gd}</td>
-          <td>{el.points}</td>
+          <td>{el.gd > 0 ? `+${el.gd}` : el.gd}</td>
+          <td>
+            <strong>{el.points}</strong>
+          </td>
           <td>
             <ul className="game_forms">
               {el.form.map((elm, idx) => {

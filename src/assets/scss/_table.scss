@@ -9,15 +9,25 @@
   th,
   td {
     padding: 12px 15px;
-  }
-
-  p {
-    line-height: $header-height;
-    cursor: pointer;
+    img {
+      width: 30px;
+      margin-bottom: -10px;
+    }
   }
 
   tbody {
     tr {
+      td {
+        strong {
+          font-weight: $score-weight;
+        }
+        &.teams {
+          cursor: pointer;
+        }
+        span {
+          line-height: $header-height;
+        }
+      }
       border-bottom: 1px solid $borderColor;
       transition: 0.2s ease;
 
