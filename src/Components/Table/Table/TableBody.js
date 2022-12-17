@@ -1,6 +1,8 @@
 import React from "react";
 
 const TableBody = ({ clubData, handleOpenModal, setModalData }) => {
+console.log(clubData);
+
   const ClubList = () => (
     <tbody>
       {clubData?.map((el, idx) => (

@@ -11,16 +11,15 @@ const Home = () => {
   const clubData = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const matches = clubData?.ClubData?.matches;
+  const matches = clubData?.ClubData?.matches ?? [];
 
   let firstTeam = [];
   let secondTeam = [];
 
-  for (let i = 0; i < matches?.length; i++) {
-    let gameOccurred = matches?.[i]?.score ? true : false;
-    let score1 = gameOccurred && matches?.[i]?.score?.ft?.[0];
-    let score2 = gameOccurred && matches?.[i]?.score?.ft?.[1];
-
+  for (let i = 0; i < matches.length; i++) {
+    let gameOccurred = typeof matches[i].score == "undefined" ? false : true;
+    let score1 = !gameOccurred ? 0 : matches[i].score.ft[0];
+    let score2 = !gameOccurred ? 0 : matches[i].score.ft[1];
     if (matches?.length) {
       firstTeam.push({
         name: matches?.[i]?.team1,
@@ -30,7 +29,7 @@ const Home = () => {
         draw: !gameOccurred ? 0 : score1 == score2 ? 1 : 0,
         gf: score1,
         ga: score2,
-        gd: Math.abs(score1 - score2),
+        gd: score1 - score2,
         points: !gameOccurred
           ? 0
           : score1 > score2
@@ -47,10 +46,10 @@ const Home = () => {
         draw: !gameOccurred ? 0 : score1 == score2 ? 1 : 0,
         gf: score2,
         ga: score1,
-        gd: Math.abs(score1 - score2),
+        gd: score2 - score1,
         points: !gameOccurred
           ? 0
-          : score1 > score2
+          : score2 > score1
           ? 3
           : score1 == score2
           ? 1
@@ -62,6 +61,7 @@ const Home = () => {
   let combinedTeam = [...firstTeam, ...secondTeam];
 
   var result = [];
+
   combinedTeam.reduce(function (res, value) {
     if (!res[value.name]) {
       res[value.name] = {
@@ -89,9 +89,6 @@ const Home = () => {
     return res;
   }, {});
 
-  const filteredClub = Object.values(result);
-  console.log(result);
-
   const [isOpen, setIsOpen] = useState({
     show: false,
     id: null,
@@ -113,8 +110,18 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(clubList());
+    let mounted = true;
+    if (mounted) {
+      dispatch(clubList());
+    }
+    return () => {
+      mounted = false;
+    };
   }, []);
+
+  const sortedClub = Object.values(result).sort(function (a, b) {
+    return b.points - a.points;
+  });
 
   return (
     <>
@@ -126,7 +133,7 @@ const Home = () => {
         <table className="table">
           <TableHead />
           <TableBody
-            clubData={filteredClub}
+            clubData={sortedClub}
             handleOpenModal={handleOpenModal}
             setModalData={setModalData}
           />
