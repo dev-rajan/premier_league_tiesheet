@@ -7,21 +7,23 @@ const TableBody = ({ clubData, handleOpenModal, setModalData }) => {
         <tr key={idx}>
           <td>{idx + 1}</td>
           <td
-          className="teams"
+            className="teams"
             onClick={() => {
               handleOpenModal(idx);
               setModalData(el);
             }}
           >
-            <p>
-              {el.team1} {el.score?.ft?.length && `(${el.score?.ft?.[0]})`}
-            </p>
-            <p>
-              {el.team2} {el.score?.ft?.length && `(${el.score?.ft?.[1]})`}
-            </p>
+            <p>{el.name}</p>
           </td>
-          <td>{el.round}</td>
-          <td>{el.date}</td>
+          <td>{el.played}</td>
+          <td>{el.won}</td>
+          <td>{el.draw}</td>
+          <td>{el.lost}</td>
+          <td>{el.gf}</td>
+          <td>{el.ga}</td>
+          <td>{el.gd}</td>
+          <td>{el.points}</td>
+          <td>{el.won}</td>
         </tr>
       ))}
     </tbody>
