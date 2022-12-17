@@ -7,11 +7,14 @@ import TableHead from "./Table/TableHead";
 import TableBody from "./Table/TableBody";
 import Modal from "../Modal/Modal";
 
+import Logo from "../../assets/images/logo.png";
+
 const Home = () => {
   const clubData = useSelector((state) => state);
   const dispatch = useDispatch();
 
   var matches = clubData?.ClubData?.matches ?? [];
+
   if (matches.length > 0) {
     matches = matches.filter((x) => x.score);
   }
@@ -90,8 +93,6 @@ const Home = () => {
     return res;
   }, {});
 
-  console.log(result);
-
   const [isOpen, setIsOpen] = useState({
     show: false,
     id: null,
@@ -130,6 +131,7 @@ const Home = () => {
     <>
       <div className="container">
         <div className="title">
+          <img src={Logo} alt={clubData?.ClubData?.name} />
           <h1>{clubData?.ClubData?.name}</h1>
         </div>
 

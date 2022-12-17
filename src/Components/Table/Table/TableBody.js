@@ -1,11 +1,9 @@
 import React from "react";
 
 const TableBody = ({ clubData, handleOpenModal, setModalData }) => {
-  console.log(clubData);
-
   const ClubList = () => (
     <tbody>
-      {clubData?.map((el, idx) => (
+      {clubData.map((el, idx) => (
         <tr key={idx}>
           <td>{idx + 1}</td>
           <td
@@ -26,15 +24,29 @@ const TableBody = ({ clubData, handleOpenModal, setModalData }) => {
           <td>{el.gd}</td>
           <td>{el.points}</td>
           <td>
-            {el.form.map((elm, idx) => {
-              if (elm == 3) {
-                return <span key={idx}>won</span>;
-              } else if ((elm = 1)) {
-                return <span key={idx}>drew</span>;
-              } else {
-                return <span key={idx}>loss</span>;
-              }
-            })}
+            <ul className="game_forms">
+              {el.form.map((elm, idx) => {
+                if (elm == 3) {
+                  return (
+                    <li key={idx} className="win">
+                      W
+                    </li>
+                  );
+                } else if (elm == 1) {
+                  return (
+                    <li key={idx} className="draw">
+                      D
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li key={idx} className="lost">
+                      L
+                    </li>
+                  );
+                }
+              })}
+            </ul>
           </td>
         </tr>
       ))}
